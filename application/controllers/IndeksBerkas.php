@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class JenisSurat extends CI_Controller {
+class IndeksBerkas extends CI_Controller {
 
 	function __construct()
     {
@@ -10,37 +10,38 @@ class JenisSurat extends CI_Controller {
         $this->load->library(array('form_validation','pagination','session'));
         $this->load->model('Auth_model');
         $this->load->model('Calendar_model');
-        $this->load->model('JenisSurat_model');
+        $this->load->model('IndeksBerkas_model');
         if($this->Auth_model->isNotLogin()) redirect('auth');
     }
 
 	public function index()
 	{
-        $data['jenissurat'] = $this->JenisSurat_model->showJenis()->result();
+        $data['indeks'] = $this->IndeksBerkas_model->showIndeks()->result();
 
 		$this->load->view('parts/header');
         $this->load->view('parts/sidebar');
-		$this->load->view('v_jenis-surat', $data);
+		$this->load->view('v_indeks-berkas', $data);
 		$this->load->view('parts/footer');
 	}
 
     public function create()
     {
         $data = array(
-            'jenis' => $this->input->post('jenis'),
+            'kode_indeks' => $this->input->post('kode'),
+            'keterangan' => $this->input->post('keterangan'),
             'created_at' => $this->Calendar_model->indocal()
         );
 
-        $simpan = $this->JenisSurat_model->createJenis($data);
+        $simpan = $this->IndeksBerkas_model->createIndeks($data);
         if($simpan)
         {
             $this->session->set_flashdata('message','successfull'); 
-            redirect('jenissurat');
+            redirect('indeksberkas');
         }
         else
         {
             $this->session->set_flashdata('message','error'); 
-            redirect('jenissurat');
+            redirect('indeksberkas');
         }
 
     }
@@ -49,20 +50,21 @@ class JenisSurat extends CI_Controller {
     {
         $id = $this->input->post('id');
         $data = array(
-            'jenis' => $this->input->post('jenis'),
+            'kode_indeks' => $this->input->post('kode'),
+            'keterangan' => $this->input->post('keterangan'),
             'updated_at' => $this->Calendar_model->indocal()
         );
 
-        $simpan = $this->JenisSurat_model->editJenis($id, $data);
+        $simpan = $this->IndeksBerkas_model->editIndeks($id, $data);
         if($simpan)
         {
             $this->session->set_flashdata('message2','successfull'); 
-            redirect('jenissurat');
+            redirect('indeksberkas');
         }
         else
         {
             $this->session->set_flashdata('message2','error'); 
-            redirect('jenissurat');
+            redirect('indeksberkas');
         }
     }
 
@@ -70,16 +72,16 @@ class JenisSurat extends CI_Controller {
     {
         $id = $this->input->post('id');
         
-        $hapus = $this->JenisSurat_model->deleteJenis($id);
+        $hapus = $this->IndeksBerkas_model->deleteIndeks($id);
         if($hapus)
         {
             $this->session->set_flashdata('message3','successfull');
-            redirect('jenissurat');
+            redirect('indeksberkas');
         }
         else
         {
             $this->session->set_flashdata('message3','error');
-            redirect('jenissurat');
+            redirect('indeksberkas');
         }
     }
 

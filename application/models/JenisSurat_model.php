@@ -16,17 +16,17 @@ class JenisSurat_model extends CI_Model
         return $query;
     }
 
-    public function editPersonel($id,$data)
+    public function editJenis($id,$data)
     {
-        $this->db->where('id_personel',$id);
-        $this->db->update('personel',$data);
+        $this->db->where('id_jenis',$id);
+        $this->db->update('jenis_surat',$data);
         return true;
     }
 
-    public function deletePersonel($id)
+    public function deleteJenis($id)
     {
-        $this->db->where('id_personel',$id);
-        $this->db->delete('personel');
+        $this->db->where('id_jenis',$id);
+        $this->db->delete('jenis_surat');
         return true;
     }
 
