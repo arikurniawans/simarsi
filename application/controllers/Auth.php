@@ -29,6 +29,27 @@ class Auth extends CI_Controller {
        
     }
 
+    public function changepass()
+    {
+        $id = $this->input->post('id');
+
+        $data = array(
+            'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
+        );
+
+        $simpan = $this->Auth_model->editPass($id, $data);
+        if($simpan)
+        {
+            //$this->session->set_flashdata('message2','successfull'); 
+            redirect('auth/signout');
+        }
+        else
+        {
+            $this->session->set_flashdata('message2','error'); 
+            redirect('dashboard');
+        }
+    }
+
 	public function signout()
 	{
         $this->session->sess_destroy();

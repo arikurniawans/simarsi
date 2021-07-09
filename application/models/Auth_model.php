@@ -35,10 +35,21 @@ class Auth_model extends CI_Model
                 $session['nrp'] = $result[0]->nrp;
                 $session['no_telpon'] = $result[0]->no_telpon;
                 $session['user_status'] = $result[0]->user_status;
+
+
                 $this->session->set_userdata($session);
                 if($result[0]->user_status == 'admin'){
                     redirect('dashboard');
                 }else if($result[0]->user_status == 'personel' || $result[0]->user_status == 'pimpinan'){
+                    
+                    // $resrole = $this->db->get_where('role_management',array(
+                    //     'nrp'=>$result[0]->nrp
+                    // ))->result();
+
+                    // foreach($resrole as $data){
+                    //     $session['menus'] = $data->menus;
+                    //     $session['role'] = $data->role;
+                    // }
                     redirect('dashboard');
                 }
                 
@@ -51,6 +62,13 @@ class Auth_model extends CI_Model
             $this->session->set_flashdata("error2","failaccount");
             redirect('auth');
         }
+    }
+
+    public function editPass($id, $data)
+    {
+        $this->db->where('id_personel',$id);
+        $this->db->update('users',$data);
+        return true;
     }
 
     public function isNotLogin(){
