@@ -17,7 +17,7 @@ class Auth extends CI_Controller {
 		if($this->Auth_model->logged_in()){
             redirect('dashboard');
         }else{
-            $this->load->view('v_login');
+            $this->load->view('v_login2');
         }
 	}
 

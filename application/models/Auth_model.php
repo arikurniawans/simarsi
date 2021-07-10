@@ -41,15 +41,6 @@ class Auth_model extends CI_Model
                 if($result[0]->user_status == 'admin'){
                     redirect('dashboard');
                 }else if($result[0]->user_status == 'personel' || $result[0]->user_status == 'pimpinan'){
-                    
-                    // $resrole = $this->db->get_where('role_management',array(
-                    //     'nrp'=>$result[0]->nrp
-                    // ))->result();
-
-                    // foreach($resrole as $data){
-                    //     $session['menus'] = $data->menus;
-                    //     $session['role'] = $data->role;
-                    // }
                     redirect('dashboard');
                 }
                 
@@ -73,6 +64,30 @@ class Auth_model extends CI_Model
 
     public function isNotLogin(){
         return $this->session->userdata('id') === null;
+    }
+
+    public function isNotAccess(){
+        $resrole = $this->db->get_where('role_management',array(
+            'nrp' => $this->session->userdata('nrp')
+        ))->result();
+
+        if($resrole[0]->menus == "dashboard" AND $resrole[0]->role == "F"){
+            return true;
+        }
+
+        // foreach($resrole as $data){
+        //     if($data->menus == "dashboard" AND $data->role == "F"){
+        //         return "Tes";
+        //     }else if($data->menus == "suratmasuk" AND $data->role == "F"){
+        //         return "Tes";
+        //     }else if($data->menus == "suratkeluar" AND $data->role == "F"){
+        //         return "Tes";
+        //     }else if($data->menus == "laporansuratmasuk" AND $data->role == "F"){
+        //         return "Tes";
+        //     }else if($data->menus == "laporansuratkeluar" AND $data->role == "F"){
+        //         return "Tes";
+        //     }
+        // }
     }
 
 }

@@ -61,13 +61,6 @@ class Pengguna extends CI_Controller {
 
         array_push($rolesdata, array(
             'nrp' => $this->input->post('nrp'),
-            'menus' => 'dashboard',
-            'role' => 'F',
-            'created_at' => $this->Calendar_model->indocal()
-        ));
-
-        array_push($rolesdata, array(
-            'nrp' => $this->input->post('nrp'),
             'menus' => 'suratmasuk',
             'role' => 'F',
             'created_at' => $this->Calendar_model->indocal()

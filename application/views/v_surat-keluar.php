@@ -19,6 +19,9 @@
                             <thead>
                                 <tr style="background-color: #374f65; color: white;">
                                     <th width="2%">#</th>
+                                    <?php if($this->session->userdata('user_status') == "admin"){ ?>
+                                    <th width="15%">Pemilik Arsip</th>
+                                    <?php } ?>
                                     <th width="15%">Nomor Surat</th>
                                     <th>Asal Surat</th>
                                     <th width="15%">Tanggal Surat</th>
@@ -30,6 +33,9 @@
                             <?php $no=1; foreach($surat as $data){ ?>
                                 <tr>
                                     <td><?php echo $no++; ?></td>
+                                    <?php if($this->session->userdata('user_status') == "admin"){ ?>
+                                    <td><?php echo $data->nama; ?></td>
+                                    <?php } ?>
                                     <td><?php echo $data->nomor_surat; ?></td>
                                     <td><?php echo $data->asal_surat; ?></td>
                                     <td><?php echo $data->tgl_surat; ?></td>

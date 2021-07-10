@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <form method="post" action="<?php echo base_url(); ?>pengguna/createroles">
+                <form method="post" action="<?php echo base_url(); ?>pengguna/editrole">
                 <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title">Tabel Role Management</div>
